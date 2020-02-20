@@ -13,6 +13,7 @@ export type UrisOfIds = Map<string, Uri | null>
  * A map of namespaced IDs (in form of `type|ID`) and URIs.
  */
 export type FetchConfigFunction = (uri: Uri) => Promise<Config>
+export type FetchTextFunction = (url: string) => Promise<string>
 export type GetUriFromIdFunction = (pathExists: PathExistsFunction, roots: Uri[], uris: UrisOfStrings, urisOfIds: UrisOfIds, id: Identity, category: CacheKey, preferredRoot?: Uri) => Promise<Uri | null>
 export type PathExistsFunction = (path: string) => Promise<boolean>
 export type ReadFileFunction = (path: string, encoding: string) => Promise<string>

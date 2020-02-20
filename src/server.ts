@@ -46,10 +46,13 @@ const urisOfIds: UrisOfIds = new Map<string, Uri | null>()
  */
 const roots: Uri[] = []
 
+let blockPath
+let nbtdocPath
+let registryPath
 let cachePath: string | undefined
 let cacheFile: CacheFile = clone(DefaultCacheFile)
 
-connection.onInitialize(async ({ workspaceFolders, initializationOptions: { storagePath } }, _, progress) => {
+connection.onInitialize(async ({ workspaceFolders, initializationOptions: { storagePath, globalStoragePath } }, _, progress) => {
     await loadLocale()
 
     progress.begin(locale('server.initializing'))
@@ -77,12 +80,24 @@ connection.onInitialize(async ({ workspaceFolders, initializationOptions: { stor
         }
 
         cachePath = path.join(storagePath, './cache.json')
+        blockPath = path.join(globalStoragePath, './block/')
+        registryPath = path.join(globalStoragePath, './registry/')
+        nbtdocPath = path.join(globalStoragePath, './nbtdoc/')
 
-        connection.console.info(`storagePath = ${storagePath}`)
-        connection.console.info(`cachePath = ${cachePath}`)
+        connection.console.info(`storagePath = ‘${storagePath}’`)
+        connection.console.info(`cachePath = ‘${cachePath}’`)
+        connection.console.info(`globalStoragePath = ‘${globalStoragePath}’`)
+        connection.console.info(`blockPath = ‘${blockPath}’`)
+        connection.console.info(`registryPath = ‘${registryPath}’`)
+        connection.console.info(`nbtdocPath = ‘${nbtdocPath}’`)
+        
         if (!await fs.pathExists(storagePath)) {
             await fs.mkdirp(storagePath)
         }
+        if (!await fs.pathExists(globalStoragePath)) {
+            await fs.mkdirp(globalStoragePath)
+        }
+
         if (fs.existsSync(cachePath)) {
             cacheFile = await fs.readJson(cachePath, { encoding: 'utf8' })
             if (cacheFile.version !== LatestCacheFileVersion) {

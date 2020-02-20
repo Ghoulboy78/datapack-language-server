@@ -61,8 +61,8 @@
         "ts-node": "^8.5.4",
         "typescript": "^3.7.4",
         "vscode": "^1.1.36",
-        "webpack": "^4.41.5",
-        "webpack-cli": "^3.3.10"
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11"
     },
     "repository": {
         "type": "git",
@@ -127,8 +127,24 @@
                         "1.15",
                         "1.16"
                     ],
-                    "markdownDescription": "Game version.",
+                    "markdownDescription": "The version of the command tree. Only major versions are available.",
                     "default": "1.16"
+                },
+                "datapackLanguageServer.env.dataVersion": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "Latest release",
+                                "Latest snapshot"
+                            ]
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "markdownDescription": "The version of the completion data, including registries, block definitions, and nbtdoc. Should be an identity in the [version manifest](https://launchermeta.mojang.com/mc/game/version_manifest.json) which was released after `19w40a`. Apart from a version identity, you can also input `Latest release` or `Latest snapshot` here (case-insensitive).",
+                    "default": "Latest snapshot"
                 },
                 "datapackLanguageServer.snippets": {
                     "type": "object",

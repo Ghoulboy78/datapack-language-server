@@ -130,3 +130,16 @@ export function getSemanticTokensLegend(): Proposed.SemanticTokensLegend {
 
     return { tokenTypes, tokenModifiers }
 }
+
+// /**
+//  * Get the latest version of the specific game version.
+//  * @param version The configured game version.
+//  * @throws
+//  */
+// export async function getLatestVersion(version: CommandTreeVersion, fetchText: FetchTextFunction): string {
+//     const manifest: VersionManifest = JSON.parse(await fetchText('https://launchermeta.mojang.com/mc/game/version_manifest.json'))
+//     for (const { id, url } of manifest.versions) {
+//         const json = JSON.parse(await fetchText(url))
+//     }
+//     throw ''
+// }
